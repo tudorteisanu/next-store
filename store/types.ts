@@ -1,0 +1,14 @@
+export const LOAD_GOODS = 'LOAD_GOODS'
+export const GOODS_UPDATE = 'GOODS_UPDATE'
+export const GOODS_LOADING = 'GOODS_LOADING'
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
+export const CATEGORIES_LOADING = 'CATEGORIES_LOADING'
+export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES'
+export const SET_TOKEN = 'LOGIN'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const USERS_CREATE = "USERS_CREATE"
+export const USERS_UPDATE = "USERS_UPDATE"
+export const USERS_FETCH = "USERS_FETCH"
+export const USERS_LOADING = "USERS_LOADING"
+export const GLOBAL_LOADING = "GLOBAL_LOADING"

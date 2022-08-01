@@ -4,7 +4,7 @@ const nextConfig = {
     swcMinify: true,
     output: 'standalone',
     publicRuntimeConfig: {
-        backendUrl: "https://api.nanoit.dev/",
+        backendUrl: process.env.NEXT_PUBLIC_API_URL,
     },
 }
 

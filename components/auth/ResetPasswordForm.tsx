@@ -18,15 +18,12 @@ class ResetPasswordForm extends React.Component<any, any> {
     this.http = HttpService;
   }
 
-  static getInitialProps(ctx: any) {
-    const { token } = ctx.query
-    if (token) {
-      return {ctx}
-    }
-    return {}
-  }
-
-  async componentDidMount() {
+   async componentDidMount() {
+    const [,rawQuery] = this.props.router.asPath.split('?')
+     if (rawQuery) {
+       const [,token] = rawQuery.split('=')
+       this.setState({...this.state, token})
+     }
     await this.checkResetToken();
   }
 

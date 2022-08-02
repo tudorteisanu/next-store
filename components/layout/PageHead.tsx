@@ -1,7 +1,5 @@
 import {Component} from "react";
 import Head from 'next/head'
-import { withTranslation } from 'react-i18next';
-import hoistStatics from 'hoist-non-react-statics';
 
 interface PropsInterface {
   title?: string;
@@ -51,4 +49,4 @@ class PageHead extends Component<PropsInterface> {
   }
 }
 
-export default hoistStatics(withTranslation()(PageHead), PageHead)
+export default PageHead;

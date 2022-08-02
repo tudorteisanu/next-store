@@ -1,18 +1,20 @@
 import React from "react";
 import Header from "../components/navigation/Header";
-import { UserInterface } from "../ts/interfaces";
+import {UserInterface} from "../ts/interfaces";
 import {NextPageContext} from "next";
 import cookies from "next-cookies";
 import {store} from "../store";
 import {setToken} from "../store/actions/auth";
 import Loading from "../components/base/Loading";
+import PageHead from "../components/layout/PageHead";
 
 interface IProps {
   children?: any;
 }
+
 interface IState {
   user: UserInterface;
-    userAgent: any;
+  userAgent: any;
 }
 
 class Default extends React.Component<IProps, IState> {
@@ -24,11 +26,13 @@ class Default extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div className="w-full  min-h-screen bg-gray-700">
-        <Header />
-        <div>{this.props.children}</div>
-        <Loading />
-      </div>
+      <><PageHead />
+        <div className="w-full  min-h-screen bg-gray-700">
+          <Header/>
+          <div>{this.props.children}</div>
+          <Loading/>
+        </div>
+      </>
     );
   }
 }

@@ -43,7 +43,6 @@ RUN adduser --system --uid 1001 nextjs
 RUN apk --no-cache add yarn --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 RUN yarn global add pm2
-RUN yarn global add dotenv
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
@@ -54,8 +53,7 @@ COPY --from=builder /app/package.json ./package.json
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/entrypoint.sh ./
-COPY --from=builder --chown=nextjs:nodejs /app/pm2.json ./
+COPY --from=builder --chown=nextjs:nodejs /app/codedeploy/* ./
 
 USER nextjs
 

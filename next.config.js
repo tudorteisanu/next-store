@@ -6,6 +6,14 @@ const nextConfig = {
     publicRuntimeConfig: {
         backendUrl: "https://api.nanoit.dev/",
     },
+    i18n: {
+        locales: ["en"],
+        defaultLocale: "en",
+    },
+    productionBrowserSourceMaps: true,
+    images: {
+        domains: ['api.nanoit.dev']
+    }
 }
 
 module.exports = nextConfig

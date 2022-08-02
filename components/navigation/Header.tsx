@@ -26,7 +26,7 @@ class Header extends React.Component<any, any> {
     }
 
     if (isActive) {
-      return "font-normal text-red-500 mx-2 cursor-pointer";
+      return "font-normal underline font-bold mx-2 cursor-pointer";
     }
 
     return "font-normal text-white mx-2 cursor-pointer";
@@ -34,7 +34,7 @@ class Header extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="w-full p-5 bg-blue-800 text-white flex  items-center justify-between"  >
+      <div className="w-full p-5 bg-blue-800 text-white flex items-center justify-between"  >
         <div>
           {this.links.map((link, i) => (
             <NavLink href={link.to} key={i} >

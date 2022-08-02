@@ -1,13 +1,19 @@
 import React, {Component, createRef} from "react";
 import {ApiRoutes} from "../../ts/enum";
 import http from "../../services/http";
+import Image from 'next/image';
 
 class FilePreview extends Component<any, any> {
   render() {
     if (this.props.file?.url) {
       return (
-        <img
-          className="h-48 w-48 object-cover overflow-hidden bg-gray-100"
+        <Image
+          itemProp="image"
+          loading="lazy"
+          width={300}
+          height={300}
+          layout="fixed"
+          className="object-cover overflow-hidden bg-gray-100"
           src={this.props.file?.url}
           alt={this.props.file?.name}
         />

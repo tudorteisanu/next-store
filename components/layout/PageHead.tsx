@@ -7,8 +7,6 @@ interface PropsInterface {
   ogTitle?: string
   ogDescription?: string
   ogUrl?: string;
-  t: Function;
-  i18n: any
 }
 
 class PageHead extends Component<PropsInterface> {
@@ -17,10 +15,7 @@ class PageHead extends Component<PropsInterface> {
   }
 
   get title(): string {
-    console.log(this.props)
-    console.log(this.props.t('appName', {ns: 'home'}))
-
-    return this.props.title || 'appName'
+    return this.props.title || 'Next store'
   }
 
   get description(): string {

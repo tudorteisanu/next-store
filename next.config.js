@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: true,
+    swcMinify: false,
     output: 'standalone',
     publicRuntimeConfig: {
-        backendUrl: "https://api.nanoit.dev/",
+        // backendUrl: "https://api.nanoit.dev/",
+        backendUrl: process.env.NEXT_PUBLIC_API_URL,
     },
     i18n: {
         locales: ["en"],

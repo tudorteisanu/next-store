@@ -19,13 +19,21 @@ jobs:
           registry: docker.pkg.github.com
           username: $GITHUB_ACTOR
           password: ${{ secrets.DOCKER_AUTH_TOKEN }}
+          
+      - name: Create env file
+        run: |
+          touch .env
+          echo NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} > .env
+          cat .env
+        env: 
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }} 
+          
       - name: Build image and push to GitHub Packages
         uses: docker/build-push-action@v2
         with:
           context: .
           tags: "docker.pkg.github.com/tudorteisanu/next-store/dev"
           push: true
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
       - name: Add ssh key
         run: |
@@ -33,6 +41,7 @@ jobs:
           mkdir "$HOME/.ssh"
           echo "${{ secrets.key }}" > "$HOME/.ssh/key"
           chmod 600 "$HOME/.ssh/key"
+          
       - name: Update services
         shell: bash
         env:

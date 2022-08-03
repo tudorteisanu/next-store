@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {PageRoutes} from "../../../ts/enum";
 import NavLink from "next/link";
-import Image from "next/image";
+import ImagePreview from "../../base/ImagePreview";
 
 interface IProps {
   good: any;
@@ -15,12 +15,8 @@ export default class GoodCard extends Component<IProps> {
         <NavLink href={`${PageRoutes.Goods}/${this.props.good.id}`}>
           <div className="flex-1 flex flex-col justify-between ">
             <div className="h-full">
-              <Image
-                width={300}
-                itemProp="image"
-                height={300}
-                src={this.props.good?.photo?.url}
-                alt={this.props.good.name}
+              <ImagePreview
+                photo={this.props.good.photo}
               />
             </div>
             <div>

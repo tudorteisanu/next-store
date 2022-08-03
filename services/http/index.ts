@@ -1,15 +1,12 @@
 import axios, {Axios} from "axios";
 import {authInterceptor} from "../interceptors";
-import getConfig from 'next/config';
-
-const {publicRuntimeConfig} = getConfig();
 
 export class HttpService {
   private readonly axios: Axios;
 
   constructor() {
     this.axios = axios.create({
-      baseURL: publicRuntimeConfig.backendUrl,
+      baseURL: `/api/`,
       headers: {
         "Content-Type": "application/json",
       },

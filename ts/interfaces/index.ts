@@ -1,8 +1,11 @@
 export interface UserInterface {
-  id?: number;
-  name: string;
+  id?: string;
+  name?: string;
+  email?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
-export type {CategoryInterface} from './category'
+export type {CategoryInterface, CreateCategoryInterface} from './category'
 export type {PhotoInterface} from './photo'
 export type {GoodInterface} from './goods'
 export type {LoginInterface, RegisterInterface} from './auth'

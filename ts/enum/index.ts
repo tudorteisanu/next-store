@@ -13,3 +13,7 @@ export {
   STATUS_CODE_UNAUTHORIZED,
   STATUS_CODE_UNPROCESSABLE_ENTITY
 } from './http'
+
+export  {
+  RequestMethods
+} from './requestMethods'

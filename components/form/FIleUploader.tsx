@@ -1,8 +1,8 @@
 import React, {Component, createRef} from "react";
 import {ApiRoutes} from "../../ts/enum";
 import http from "../../services/http";
-import Image from 'next/image';
 import {PhotoInterface} from "../../ts/interfaces";
+import ImagePreview from "../base/ImagePreview";
 
 interface FilePreviewProps {
   file: PhotoInterface | null | undefined;
@@ -10,17 +10,10 @@ interface FilePreviewProps {
 
 class FilePreview extends Component<FilePreviewProps> {
   render() {
-    if (this.props.file?.url) {
+    if (this.props.file) {
       return (
-        <Image
-          itemProp="image"
-          loading="lazy"
-          width={300}
-          height={300}
-          layout="fixed"
-          className="object-cover overflow-hidden bg-gray-100"
-          src={this.props.file?.url}
-          alt={this.props.file?.name}
+        <ImagePreview
+          photo={this.props.file}
         />
       );
     }

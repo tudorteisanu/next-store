@@ -55,7 +55,7 @@ class Form extends Component<any, any> {
       });
 
       await this.props.updateUserById(this.props.userId, model)
-      await this.props.router.push(PageRoutes.Home)
+      await this.props.router.push(PageRoutes.Users)
     } catch (e: any) {
       if (e.hasOwnProperty('errors')) {
         this.setState({...this.state, errors: e.errors})

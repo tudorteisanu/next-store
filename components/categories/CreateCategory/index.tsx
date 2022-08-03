@@ -55,7 +55,7 @@ class CreateCategory extends Component<CreateCategoryProps, CreateCategoryState>
 
       await http.post(ApiRoutes.Categories, newModel);
       this.setState({submitted: true, model: {name: ''}});
-      await this.props.router.push(PageRoutes.Home)
+      await this.props.router.push(PageRoutes.Categories)
     } catch (e: any) {
       if (e.hasOwnProperty('errors')) {
         this.setState({...this.state, errors: e.errors})

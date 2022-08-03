@@ -30,11 +30,6 @@ export const fetchCategories = () => async (dispatch: Dispatch) => {
 
 export const fetchCategoryById = (id: number) => async (dispatch: Dispatch) => {
   try {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: true,
-    });
-
     const categoryByIdUrl = `${ApiRoutes.Categories}/${id}`
     const payload = await http.get(categoryByIdUrl);
 
@@ -45,21 +40,11 @@ export const fetchCategoryById = (id: number) => async (dispatch: Dispatch) => {
     return payload
   } catch (e) {
     console.log(e);
-  } finally {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: false,
-    });
   }
 };
 
 export const updateCategoryById = (id: number, data: CategoryInterface) => async (dispatch: Dispatch) => {
   try {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: true,
-    });
-
     const categoryByIdUrl = `${ApiRoutes.Categories}/${id}`
     const payload = await http.patch(categoryByIdUrl, data);
 
@@ -70,10 +55,5 @@ export const updateCategoryById = (id: number, data: CategoryInterface) => async
     return payload
   } catch (e: any) {
     throw e
-  } finally {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: false,
-    });
   }
 };

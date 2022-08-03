@@ -1,8 +1,14 @@
 import {PhotoInterface} from "./photo";
+import {GoodInterface} from "./goods";
 
-export interface CategoryInterface {
-  id?: number | undefined;
+export interface CreateCategoryInterface {
+  id: undefined;
   name: string;
-  photoId?: number | null;
-  photo?: PhotoInterface | null
+  photoId?: number;
+  photo: PhotoInterface | undefined;
+  good: Array<GoodInterface>
+}
+
+export interface CategoryInterface  extends Partial<CreateCategoryInterface>{
+
 }

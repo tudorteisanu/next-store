@@ -1,8 +1,8 @@
 import { Component } from "react";
 import {PageRoutes} from "../../../ts/enum";
 import NavLink from "next/link";
-import Image from "next/image";
 import {CategoryInterface} from "../../../ts/interfaces";
+import ImagePreview from "../../base/ImagePreview";
 
 interface IProps {
   category: CategoryInterface;
@@ -19,14 +19,8 @@ export default class CategoryCard extends Component<IProps> {
         <NavLink href={`${PageRoutes.Categories}/${this.props.category.id}`}>
           <div className="flex-1 h-full flex flex-col justify-between ">
           <div className="h-full">
-            <Image
-              loading="lazy"
-              width={300}
-              height={300}
-              layout="intrinsic"
-              className="object-cover flex-shrink-0 mx-auto rounded-t-md"
-              src={this.imageSrc}
-              alt={this.props.category.name}
+            <ImagePreview
+              photo={this.props.category.photo}
             />
           </div>
           <div>

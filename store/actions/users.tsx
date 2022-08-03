@@ -7,11 +7,6 @@ import {UserInterface} from "../../ts/interfaces";
 
 export const fetchUsers = () => async (dispatch: Dispatch) => {
     try {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: true,
-        });
-
         const payload = await http.get(ApiRoutes.Users);
 
         dispatch({
@@ -20,11 +15,6 @@ export const fetchUsers = () => async (dispatch: Dispatch) => {
         });
     } catch (e) {
         throw e
-    } finally {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: false,
-        });
     }
 };
 

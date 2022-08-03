@@ -48,7 +48,8 @@ class Form extends Component<FormProps, FormState> {
   setFile(photoId: number) {
     this.setState({
       ...this.state, form: {
-        ...this.state.form, photoId
+        ...this.state.form,
+        photoId
       }
     });
   }
@@ -68,7 +69,7 @@ class Form extends Component<FormProps, FormState> {
       e.preventDefault();
 
       await this.props.updateCategoryById(this.props.categoryId, this.state.form)
-      await this.props.router.push(PageRoutes.Home)
+      await this.props.router.push(PageRoutes.Categories)
     } catch (e: any) {
       if (e.hasOwnProperty('errors')) {
         this.setState({...this.state, errors: e.errors})

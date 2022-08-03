@@ -6,7 +6,7 @@ interface ButtonProps {
 }
 
 export default class Button extends React.Component<ButtonProps> {
-  handleClick(event: any): void {
+  handleClick = (event: any): void => {
     if (this.props.onClick) {
       this.props.onClick(event)
     }

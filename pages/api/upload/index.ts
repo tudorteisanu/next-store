@@ -3,6 +3,7 @@ import {IncomingForm} from 'formidable'
 import fs from 'fs'
 import {NextApiRequest, NextApiResponse} from "next";
 import {FileService} from "../../../api/services";
+import {join} from 'path'
 
 // first we need to disable the default body parser
 export const config = {
@@ -12,7 +13,7 @@ export const config = {
 };
 
 const saveFile = async (file: any) => {
-  const rootDir = 'public'
+  const rootDir = join(process.cwd(), 'public')
   const imagesDir = 'images'
 
   const filename = `${file.newFilename}.${file.mimetype.split('/')[1]}`

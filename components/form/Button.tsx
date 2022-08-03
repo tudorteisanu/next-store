@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps {
   children: JSX.Element | string,
-  onClick?: (event: InputEvent) => InputEvent
+  onClick?: (event?: InputEvent) => InputEvent | any
 }
 
 export default class Button extends React.Component<ButtonProps> {

@@ -32,7 +32,7 @@ class EditCategory extends Component<any, any> {
       return (<Form categoryId={this.props.categoryId} toggle={() => this.toggle()}/>)
     }
     return (<div>
-      <Button onClick={this.toggle}> Add category</Button>
+      <Button onClick={()=> this.toggle()}> Add category</Button>
 
       <NavLink href={PageRoutes.Home}>
         <button className="w-full p-1 mt-2 rounded-md border border-gray-400 text-gray-500">

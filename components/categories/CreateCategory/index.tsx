@@ -11,7 +11,7 @@ import {CategoryInterface} from "../../../ts/interfaces";
 
 interface CreateCategoryProps {
   router: Router
-  children: JSX.Element
+  children?: JSX.Element
 }
 
 interface CreateCategoryState {

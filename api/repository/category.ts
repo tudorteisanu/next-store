@@ -17,7 +17,7 @@ export class CategoryRepository {
     }
   }
 
-  async create(data: CreateCategoryInterface): Promise<any> {
+  async create(data: any): Promise<any> {
     try {
       await db.category.create({data});
     } catch (error) {

@@ -1,15 +1,22 @@
 import * as types from "../types";
 import {updateExistingOrPush} from "../../utils";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {CategoryInterface} from "../../ts/interfaces";
 
-const initialData = {
-  items: [] as Array<any>,
+
+interface CategoriesStoreInterface  {
+  items: Array<CategoryInterface>;
+  loading: boolean;
+}
+
+const initialData: CategoriesStoreInterface = {
+  items: [],
   loading: false,
 };
 
-const categoriesReducer = (state = initialData, action: any) => {
+const categoriesReducer = (state = initialData, action: PayloadAction<CategoriesStoreInterface>) => {
   switch (action.type) {
     case types.LOAD_CATEGORIES:
-      state.items = action.payload;
       return { ...state, items: action.payload };
     case types.CATEGORIES_LOADING:
       return { ...state, loading: action.payload };

@@ -1,6 +1,6 @@
 import {Component} from "react";
 
-export default class LoginFooter extends Component<any, any> {
+export default class LoginFooter extends Component {
   render() {
     return (
       <div>

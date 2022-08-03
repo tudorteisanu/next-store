@@ -3,7 +3,7 @@ import FormInput from "../../form/FormInput";
 import Button from "../../form/Button";
 import {PageRoutes} from "../../../ts/enum";
 import {connect} from "react-redux";
-import {fetchUserById, updateUserById} from "../../../store/actions/users";
+import {fetchUserById, updateUserById} from "../../../store/actions";
 import {withRouter} from "next/router";
 
 class Form extends Component<any, any> {

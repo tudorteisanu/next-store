@@ -4,17 +4,30 @@ import FileUploader from "../../form/FIleUploader";
 import Button from "../../form/Button";
 import {PageRoutes} from "../../../ts/enum";
 import {connect} from "react-redux";
-import {fetchCategoryById, updateCategoryById} from "../../../store/actions/categories";
-import {withRouter} from "next/router";
+import {fetchCategoryById, updateCategoryById} from "../../../store/actions";
+import {Router, withRouter} from "next/router";
+import {CategoryInterface} from "../../../ts/interfaces";
+import {ExcludeRouterProps} from "next/dist/client/with-router";
 
-class Form extends Component<any, any> {
+interface FormProps extends ExcludeRouterProps<any> {
+  fetchCategoryById: (id: number) => Promise<CategoryInterface>,
+  categoryId: number;
+  updateCategoryById: (id: number, payload: CategoryInterface) => Promise<void>
+  router: Router
+}
+
+interface FormState {
+  form: CategoryInterface;
+  errors: Record<string, Array<string>>
+}
+
+class Form extends Component<FormProps, FormState> {
   constructor(props: any) {
     super(props);
 
     this.state = {
       form: {
         name: '',
-        photo: {},
       },
       errors: {}
     }
@@ -54,18 +67,7 @@ class Form extends Component<any, any> {
     try {
       e.preventDefault();
 
-      const model = {} as Record<string, string | number>;
-
-      Object.keys(this.state.form).map((key: string) => {
-        if (Number(this.state.form[key])) {
-          model[key] = Number(this.state.form[key]);
-        } else {
-          model[key] = this.state.form[key];
-        }
-        return key;
-      });
-
-      await this.props.updateCategoryById(this.props.categoryId, model)
+      await this.props.updateCategoryById(this.props.categoryId, this.state.form)
       await this.props.router.push(PageRoutes.Home)
     } catch (e: any) {
       if (e.hasOwnProperty('errors')) {
@@ -84,7 +86,9 @@ class Form extends Component<any, any> {
           onInput={(e: any) => this.onInput(e, "name")}
         />
         <FileUploader onUpload={(e: any) => this.setFile(e)} file={this.state.form.photo}/>
-        <Button>Submit</Button>
+        <Button onClick={(e)=> e}>
+          <span>Submit</span>
+        </Button>
       </form>
     );
   }

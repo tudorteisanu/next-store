@@ -11,8 +11,10 @@ export default class EditGoods extends Component<any, any> {
   render() {
     return (
       <Card>
-        <CardHeading title={this.title}/>
-        <Form goodId={this.props.goodId}/>
+        <>
+          <CardHeading title={this.title}/>
+          <Form goodId={this.props.goodId}/>
+        </>
       </Card>
     );
   }

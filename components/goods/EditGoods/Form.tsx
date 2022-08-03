@@ -3,7 +3,7 @@ import FormInput from "../../form/FormInput";
 import FileUploader from "../../form/FIleUploader";
 import Button from "../../form/Button";
 import {connect} from "react-redux";
-import {fetchGoodById, updateGoodById} from "../../../store/actions/goods";
+import {fetchGoodById, updateGoodById} from "../../../store/actions";
 import FormTextarea from "../../form/FormTextarea";
 import FormSelect from "../../form/FormSelect";
 import {withRouter} from "next/router";
@@ -102,7 +102,9 @@ class Form extends Component<any, any> {
           onChange={(e: any) => this.onInput(e, "categoryId")}
         />
         <FileUploader onUpload={(e: any) => this.setFile(e)} file={this.state.photo}/>
-        <Button>Submit</Button>
+        <Button>
+          <span>Submit</span>
+        </Button>
       </form>
     );
   }

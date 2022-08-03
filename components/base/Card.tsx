@@ -1,12 +1,12 @@
 import React from "react";
 
 interface IProps {
-  children?: any;
-  footer?: any;
-  header?: any;
+  children?: JSX.Element | any;
+  footer?: JSX.Element;
+  header?: JSX.Element;
 }
 
-export default class Card extends React.Component<IProps, any> {
+export default class Card extends React.Component<IProps> {
   render() {
     return (
       <div className='min-h-fit'>

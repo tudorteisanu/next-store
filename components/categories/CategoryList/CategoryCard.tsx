@@ -2,12 +2,17 @@ import { Component } from "react";
 import {PageRoutes} from "../../../ts/enum";
 import NavLink from "next/link";
 import Image from "next/image";
+import {CategoryInterface} from "../../../ts/interfaces";
 
 interface IProps {
-  category: any;
+  category: CategoryInterface;
 }
 
 export default class CategoryCard extends Component<IProps> {
+  get imageSrc(): string {
+    return  this.props.category?.photo?.url || ''
+  }
+
   render() {
     return (
       <div className="col-span-1 flex flex-col text-center bg-white shadow divide-y divide-gray-200 h-full rounded-md">
@@ -20,7 +25,7 @@ export default class CategoryCard extends Component<IProps> {
               height={300}
               layout="intrinsic"
               className="object-cover flex-shrink-0 mx-auto rounded-t-md"
-              src={this.props.category?.photo?.url}
+              src={this.imageSrc}
               alt={this.props.category.name}
             />
           </div>

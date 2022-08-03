@@ -1,14 +1,15 @@
 import React from "react";
-interface IProps {
+
+interface FormInputProps {
   type?: string;
   label?: string;
   onInput?: any;
   onChange?: any;
-  value?: any;
+  value?: string;
   errorMessages?: string[];
 }
 
-class FormInput extends React.Component<IProps> {
+class FormInput extends React.Component<FormInputProps> {
   get errorMessage(): JSX.Element {
     if (this.props.errorMessages && this.props.errorMessages.length ) {
       return <div className="px-2 py-1 text-red-500 ml-2 text-sm leading-5">{this.props.errorMessages.join(', ')}</div>
@@ -41,4 +42,4 @@ class FormInput extends React.Component<IProps> {
   }
 }
 
-export default React.memo(FormInput)
+export default FormInput

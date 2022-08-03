@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {fetchGoods} from "../../store/actions/goods";
+import {fetchGoods} from "../../store/actions";
 import GoodList from "../../components/goods/GoodList";
 import Default from "../../layouts/default";
 import NavLink from "next/link";

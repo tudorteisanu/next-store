@@ -1,15 +1,21 @@
 import * as types from "../types";
 import { updateExistingOrPush} from "../../utils";
+import {PayloadAction} from "@reduxjs/toolkit";
 
-const initialData = {
-  items: [] as Array<any>,
+
+interface UserStoreInterface  {
+  items: Array<UserStoreInterface>;
+  loading: boolean;
+}
+
+const initialData: UserStoreInterface = {
+  items: [],
   loading: false,
 };
 
-const usersReducer = (state = initialData, action: any) => {
+const usersReducer = (state = initialData, action: PayloadAction<UserStoreInterface>) => {
   switch (action.type) {
     case types.USERS_FETCH:
-      state.items = action.payload;
       return { ...state, items: action.payload };
     case types.USERS_LOADING:
       return { ...state, loading: action.payload };

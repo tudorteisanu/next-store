@@ -2,8 +2,13 @@ import React, {Component, createRef} from "react";
 import {ApiRoutes} from "../../ts/enum";
 import http from "../../services/http";
 import Image from 'next/image';
+import {PhotoInterface} from "../../ts/interfaces";
 
-class FilePreview extends Component<any, any> {
+interface FilePreviewProps {
+  file: PhotoInterface | null | undefined;
+}
+
+class FilePreview extends Component<FilePreviewProps> {
   render() {
     if (this.props.file?.url) {
       return (
@@ -35,8 +40,18 @@ class FilePreview extends Component<any, any> {
   }
 }
 
-export default class FileUploader extends Component<any, any> {
-  textInput: any;
+interface FileUploaderProps {
+  file?: PhotoInterface | null | undefined;
+  onUpload: (id: number) => void;
+  errorMessages?: Array<string>
+}
+
+interface FileUploaderState {
+  file?: PhotoInterface | null | undefined
+}
+
+export default class FileUploader extends Component<FileUploaderProps, FileUploaderState> {
+  textInput: React.RefObject<any>;
 
   constructor(props: any) {
     super(props);
@@ -75,7 +90,7 @@ export default class FileUploader extends Component<any, any> {
         <div className="py-4">
           <div className="mt-1">
             <div className="flex items-center flex-col justify-center">
-              <FilePreview file={this.state.file || this.props.file}/>
+              <FilePreview file={this.state?.file || this.props?.file}/>
               <button
                 onClick={this.pickFile}
                 type="button"

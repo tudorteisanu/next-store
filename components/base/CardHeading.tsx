@@ -20,16 +20,23 @@ export default class CardHeading extends React.Component<IProps, any> {
   }
 }
 
-class SubTitle extends Component<any, any> {
+interface SubTitleProps {
+  subTitle: string | undefined;
+}
+
+class SubTitle extends Component<SubTitleProps> {
     render() {
-        return (<div>{
-            this.props.subTitle ? (<p className="mt-2 text-center text-sm text-gray-600">
-            <NavLink
-                href={PageRoutes.Register}
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-                {this.props.subTitle}
-            </NavLink>
-        </p>) : (<div></div>)}</div>);
+      if (this.props.subTitle) {
+        return (<p className="mt-2 text-center text-sm text-gray-600">
+          <NavLink
+            href={PageRoutes.Register}
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
+            {this.props.subTitle}
+          </NavLink>
+        </p>)
+      }
+
+      return (<></>);
     }
 }

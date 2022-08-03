@@ -1,15 +1,18 @@
+import thunk from "redux-thunk";
+
 import {
   applyMiddleware,
   combineReducers,
   createStore,
 } from "@reduxjs/toolkit";
-import { goodsReducer } from "./reducers/goods";
-import thunk from "redux-thunk";
-import { authReducer } from "./reducers/auth";
-import {createWrapper} from "next-redux-wrapper";
-import {categoriesReducer} from "./reducers/categories";
-import {usersReducer} from "./reducers/users";
-import {loadingReducer} from "./reducers/loading";
+
+import {
+  goodsReducer,
+  authReducer,
+  categoriesReducer,
+  usersReducer,
+  loadingReducer
+} from "./reducers";
 
 const reducers = combineReducers({
   goods: goodsReducer,
@@ -20,10 +23,5 @@ const reducers = combineReducers({
 });
 
 const store = createStore(reducers, applyMiddleware(thunk));
-
-// assigning store to next wrapper
-const makeStore = () => store;
-
-export const wrapper = createWrapper(makeStore);
 
 export { store };

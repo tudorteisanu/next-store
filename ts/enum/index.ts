@@ -1,34 +1,15 @@
-export enum PageRoutes {
-  Login = "/auth/login",
-  Register = "/auth/register",
-  ForgotPassword = "/auth/forgot-password",
-  ResetPassword = "/auth/reset-password",
-  InvalidResetPassword = "/auth/invalid-reset-token",
-  SuccessfulChangesPassword = "/auth/success-password-change",
-  About = "/about-us",
-  GoodsCreate = "/goods/create",
-  Goods = "/goods",
-  Home = "/",
-  Error = "/error/:code",
-  Categories = "/categories",
-  Users = "/users",
-  UsersCreate = "/users/create",
-  CategoriesCreate = "/categories/create",
-}
+export  {
+  PageRoutes
+}  from './pageRoutes'
 
-export enum ApiRoutes {
-  Login = "/auth/login",
-  Register = "/auth/register",
-  ForgotPassword = "/auth/forgot-password",
-  ResetPassword = "/auth/reset-password",
-  CheckResetPassword = "/auth/check-reset-token",
-  Goods = "/goods",
-  Categories = "/categories",
-  Upload = "/upload",
-  Users = "/users",
-}
+export  {
+  ApiRoutes
+} from './apiRoutes'
 
-export enum PageLayout {
-  Default = "default",
-  Auth = "auth",
-}
+export {
+  STATUS_CODE_INTERNAL_SERVER_ERROR,
+  STATUS_CODE_NOT_FOUND,
+  STATUS_CODE_PERMISSIONS_DENIED,
+  STATUS_CODE_UNAUTHORIZED,
+  STATUS_CODE_UNPROCESSABLE_ENTITY
+} from './http'

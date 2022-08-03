@@ -4,7 +4,7 @@ import NavLink from "next/link";
 import {PageRoutes} from "../../ts/enum";
 import {connect} from "react-redux";
 import UserList from "../../components/users/UserList";
-import {fetchUsers} from "../../store/actions/users";
+import {fetchUsers} from "../../store/actions";
 
 class Users extends React.Component<any, any> {
   async componentDidMount() {

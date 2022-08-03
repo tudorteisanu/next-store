@@ -2,7 +2,7 @@ import {Component} from "react";
 import Default from "../../layouts/default";
 import EditCategory from "../../components/categories/EditCategory";
 import {connect} from "react-redux";
-import {fetchCategoryById} from "../../store/actions/categories";
+import {fetchCategoryById} from "../../store/actions";
 
 class Edit extends Component<any, any> {
   static getInitialProps(ctx: any) {

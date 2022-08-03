@@ -9,7 +9,7 @@ import LoginFooter from "./LoginFooter";
 import CardHeading from "../base/CardHeading";
 import http from "../../services/http";
 import { connect } from "react-redux";
-import { login } from "../../store/actions/auth";
+import { login } from "../../store/actions";
 
 class LoginForm extends React.Component<any, any> {
   constructor(props: any) {
@@ -26,7 +26,7 @@ class LoginForm extends React.Component<any, any> {
     });
   }
 
-  async login(event: any): Promise<void> {
+  async login(event: Event): Promise<void> {
     try {
       event.preventDefault();
       const response: any = await http.post(ApiRoutes.Login, this.state.form);

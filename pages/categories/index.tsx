@@ -3,7 +3,7 @@ import Default from "../../layouts/default";
 import NavLink from "next/link";
 import {PageRoutes} from "../../ts/enum";
 import CategoryList from "../../components/categories/CategoryList";
-import {fetchCategories} from '../../store/actions/categories';
+import {fetchCategories} from '../../store/actions';
 import {connect} from "react-redux";
 
 class Categories extends React.Component<any, any> {

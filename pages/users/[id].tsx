@@ -1,7 +1,7 @@
 import {Component} from "react";
 import Default from "../../layouts/default";
 import {connect} from "react-redux";
-import {fetchUserById} from "../../store/actions/users";
+import {fetchUserById} from "../../store/actions";
 import EditUser from "../../components/users/EditUser";
 
 class Edit extends Component<any, any> {

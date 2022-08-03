@@ -1,6 +1,10 @@
 import React from "react";
 
-export default class Checkbox extends React.Component<any, any> {
+interface CheckboxProps {
+  label: string
+}
+
+export default class Checkbox extends React.Component<CheckboxProps> {
     render() {
         return (
             <div className="flex items-center">

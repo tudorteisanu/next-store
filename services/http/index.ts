@@ -1,7 +1,8 @@
-import axios, { Axios } from "axios";
-import { authInterceptor } from "../interceptors";
+import axios, {Axios} from "axios";
+import {authInterceptor} from "../interceptors";
 import getConfig from 'next/config';
-const { publicRuntimeConfig } = getConfig();
+
+const {publicRuntimeConfig} = getConfig();
 
 export class HttpService {
   private readonly axios: Axios;
@@ -21,11 +22,6 @@ export class HttpService {
         return response.data;
       },
       function (error) {
-        // if (error.response.status === STATUS_CODE_UNAUTHORIZED) {
-        //   window.location.href = PageRoutes.Login;
-        //   return;
-        // }
-
         return Promise.reject(error.response.data);
       }
     );

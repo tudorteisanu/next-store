@@ -2,8 +2,10 @@ import * as TYPES from "../types";
 import http from "../../services/http";
 import {ApiRoutes} from "../../ts/enum";
 import {USERS_UPDATE} from "../types";
+import {Dispatch} from "redux";
+import {UserInterface} from "../../ts/interfaces";
 
-export const fetchUsers = () => async (dispatch: any) => {
+export const fetchUsers = () => async (dispatch: Dispatch) => {
     try {
         dispatch({
             type: TYPES.GLOBAL_LOADING,
@@ -26,7 +28,7 @@ export const fetchUsers = () => async (dispatch: any) => {
     }
 };
 
-export const fetchUserById = (id: number) => async (dispatch: any) => {
+export const fetchUserById = (id: number) => async (dispatch: Dispatch) => {
     try {
         dispatch({
             type: TYPES.GLOBAL_LOADING,
@@ -52,7 +54,7 @@ export const fetchUserById = (id: number) => async (dispatch: any) => {
     }
 };
 
-export const updateUserById = (id: number, data: any) => async (dispatch: any) => {
+export const updateUserById = (id: number, data: UserInterface) => async (dispatch: Dispatch) => {
     try {
         dispatch({
             type: TYPES.GLOBAL_LOADING,
@@ -77,7 +79,7 @@ export const updateUserById = (id: number, data: any) => async (dispatch: any) =
     }
 };
 
-export const createUser = (data: any) => async (dispatch: any) => {
+export const createUser = (data: UserInterface) => async (dispatch: Dispatch) => {
     try {
         dispatch({
             type: TYPES.GLOBAL_LOADING,

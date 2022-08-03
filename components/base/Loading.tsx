@@ -1,20 +1,9 @@
-import React, { Component } from "react";
-import {connect} from "react-redux";
+import { Component } from "react";
 
-interface IProps {
-  loading: boolean,
-}
-
-class Loading extends Component<IProps, any> {
-  get loadingClass(): string {
-    if (this.props.loading) {
-      return  'fixed bg-gray-900/50 flex items-center justify-center w-full h-full top-0 left-0';
-    }
-    return 'hidden'
-  }
+class Loading extends Component {
   render() {
     return (
-      <div className={this.loadingClass}>
+      <div className="fixed bg-gray-900/50 flex items-center justify-center w-full h-full top-0 left-0">
         <div className={"flex items-center justify-center flex-col"}>
           <div className="inline-block animate-spin rounded-full p-2 bg-teal-400 text-white text-sm">
             <svg
@@ -38,11 +27,4 @@ class Loading extends Component<IProps, any> {
   }
 }
 
-
-const mapStateToProps = (state: any) => {
-  return {
-    loading: state.loading,
-  };
-};
-
-export default  connect(mapStateToProps)(Loading)
+export default  Loading

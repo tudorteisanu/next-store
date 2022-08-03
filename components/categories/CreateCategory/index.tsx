@@ -6,13 +6,28 @@ import Card from "../../base/Card";
 import CardHeading from "../../base/CardHeading";
 import FileUploader from "../../form/FIleUploader";
 import Button from "../../form/Button";
-import {withRouter} from "next/router";
+import {Router, withRouter} from "next/router";
+import {CategoryInterface} from "../../../ts/interfaces";
 
-class CreateCategory extends Component<any, any> {
+interface CreateCategoryProps {
+  router: Router
+  children: JSX.Element
+}
+
+interface CreateCategoryState {
+  model: CategoryInterface;
+  submitted: boolean;
+  errors: Record<string, Array<string>>;
+  [key: string]: any
+}
+
+class CreateCategory extends Component<CreateCategoryProps, CreateCategoryState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      model: {} as any,
+      model: {
+        name: '',
+      },
       submitted: false,
       errors: {}
     };
@@ -31,20 +46,15 @@ class CreateCategory extends Component<any, any> {
 
   submit = async (e: any): Promise<void> => {
     try {
-      const model = {} as Record<string, string | number>;
-
-      Object.keys(this.state.model).map((key: string) => {
-        if (Number(this.state.model[key])) {
-          model[key] = Number(this.state.model[key]);
-        } else {
-          model[key] = this.state.model[key];
-        }
-        return key;
-      });
+      const {model} = this.state;
+      const newModel: Partial<CategoryInterface> = {
+        ...this.state.model,
+        photoId: Number(model.photoId)
+      }
       e.preventDefault();
 
-      await http.post(ApiRoutes.Categories, model);
-      this.setState({submitted: true, model: {}});
+      await http.post(ApiRoutes.Categories, newModel);
+      this.setState({submitted: true, model: {name: ''}});
       await this.props.router.push(PageRoutes.Home)
     } catch (e: any) {
       if (e.hasOwnProperty('errors')) {
@@ -60,16 +70,18 @@ class CreateCategory extends Component<any, any> {
   render() {
     return (
       <Card>
-        <CardHeading title={this.title}/>
-        <form onSubmit={this.submit}>
-          <FormInput
-            errorMessages={this.state.errors.name}
-            label="Name"
-            onInput={(e: any) => this.onInput(e, "name")}
-          />
-          <FileUploader onUpload={(e: any) => this.setFile(e)}/>
-          <Button>Submit</Button>
-        </form>
+        <div>
+          <CardHeading title={this.title}/>
+          <form onSubmit={this.submit}>
+            <FormInput
+              errorMessages={this.state.errors.name}
+              label="Name"
+              onInput={(e: any) => this.onInput(e, "name")}
+            />
+            <FileUploader onUpload={(e: any) => this.setFile(e)}/>
+            <Button>Submit</Button>
+          </form>
+        </div>
       </Card>
     );
   }

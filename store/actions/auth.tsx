@@ -1,10 +1,9 @@
 import {LOGIN, SET_TOKEN} from "../types";
 import { PageRoutes } from "../../ts/enum";
-// @ts-ignore
-import cookieCutter from 'cookie-cutter'
+import {Dispatch} from "redux";
+import {LoginInterface} from "../../ts/interfaces";
 
-export const login = (payload: any) => async (dispatch: any) => {
-  cookieCutter.set('token', payload.token, {path: '/'})
+export const login = (payload: LoginInterface) => async (dispatch: Dispatch) => {
   dispatch({
     type: LOGIN,
     payload,
@@ -13,7 +12,7 @@ export const login = (payload: any) => async (dispatch: any) => {
   window.location.href = PageRoutes.Home;
 };
 
-export const setToken = (token: any) => async (dispatch: any) => {
+export const setToken = (token: string) => async (dispatch: Dispatch) => {
   dispatch({
     type: SET_TOKEN,
     payload: {token},

@@ -5,7 +5,7 @@ import Card from "../../base/Card";
 import CardHeading from "../../base/CardHeading";
 import Button from "../../form/Button";
 import {withRouter} from "next/router";
-import {createUser} from '../../../store/actions/users';
+import {createUser} from '../../../store/actions';
 import {connect} from "react-redux";
 
 class CreateUser extends Component<any, any> {
@@ -55,28 +55,30 @@ class CreateUser extends Component<any, any> {
   render() {
     return (
       <Card>
-        <CardHeading title={this.title}/>
-        <form onSubmit={this.submit}>
-          <FormInput
-            errorMessages={this.state.errors.name}
-            label="Name"
-            onInput={(e: any) => this.onInput(e, "name")}
-          />
-          <FormInput
-            errorMessages={this.state.errors.email}
-            label="Email"
-            onInput={(e: any) => this.onInput(e, "email")}
-          />
-          <FormInput
-            errorMessages={this.state.errors.password}
-            label="Password"
-            type="password"
-            onInput={(e: any) => this.onInput(e, "password")}
-          />
-          <div className="mt-2">
-            <Button>Submit</Button>
-          </div>
-        </form>
+        <>
+          <CardHeading title={this.title}/>
+          <form onSubmit={this.submit}>
+            <FormInput
+              errorMessages={this.state.errors.name}
+              label="Name"
+              onInput={(e: any) => this.onInput(e, "name")}
+            />
+            <FormInput
+              errorMessages={this.state.errors.email}
+              label="Email"
+              onInput={(e: any) => this.onInput(e, "email")}
+            />
+            <FormInput
+              errorMessages={this.state.errors.password}
+              label="Password"
+              type="password"
+              onInput={(e: any) => this.onInput(e, "password")}
+            />
+            <div className="mt-2">
+              <Button>Submit</Button>
+            </div>
+          </form>
+        </>
       </Card>
     );
   }

@@ -2,7 +2,7 @@ import React from "react";
 import Loading from "../components/base/Loading";
 
 interface IProps {
-  children: any;
+  children: JSX.Element;
 }
 interface IState {}
 

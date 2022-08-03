@@ -1,14 +1,15 @@
 import React, {Component} from "react";
 import CategoryCard from "./CategoryCard";
+import {CategoryInterface} from "../../../ts/interfaces";
 
-interface IState {
+interface CategoryListState {
 }
 
-interface IProps {
-  categories: Array<any>;
+interface CategoryListProps {
+  categories: Array<CategoryInterface>;
 }
 
-export default class CategoryList extends Component<IProps, IState> {
+export default class CategoryList extends Component<CategoryListProps, CategoryListState> {
   render() {
     return (
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

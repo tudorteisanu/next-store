@@ -1,15 +1,22 @@
 import * as types from "../types";
 import {updateExistingOrPush} from "../../utils";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {GoodInterface} from "../../ts/interfaces";
 
-const initialBooks = {
-  items: [] as Array<any>,
+interface GoodsStoreInterface  {
+  items: Array<GoodInterface>;
+  loading: boolean;
+}
+
+
+const initialBooks: GoodsStoreInterface = {
+  items: [],
   loading: false,
 };
 
-const goodsReducer = (state = initialBooks, action: any) => {
+const goodsReducer = (state = initialBooks, action: PayloadAction<GoodsStoreInterface>) => {
   switch (action.type) {
     case types.LOAD_GOODS:
-      state.items = action.payload;
       return { ...state, items: action.payload };
     case types.GOODS_LOADING:
       return { ...state, loading: action.payload };

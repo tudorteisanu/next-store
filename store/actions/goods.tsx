@@ -1,14 +1,18 @@
-import {LOAD_GOODS, GOODS_LOADING, GOODS_UPDATE} from "../types";
+import {LOAD_GOODS, GOODS_UPDATE, GLOBAL_LOADING} from "../types";
 import http from "../../services/http";
-import { ApiRoutes } from "../../ts/enum";
+import {ApiRoutes} from "../../ts/enum";
+import * as TYPES from "../types";
+import {Dispatch} from "redux";
+import {GoodInterface} from "../../ts/interfaces";
 
-export const fetchGoods = () => async (dispatch: any) => {
+export const fetchGoods = () => async (dispatch: Dispatch) => {
   try {
     dispatch({
-      type: GOODS_LOADING,
+      type: GLOBAL_LOADING,
       payload: true,
     });
     const payload = await http.get(ApiRoutes.Goods);
+
     dispatch({
       type: LOAD_GOODS,
       payload,
@@ -17,13 +21,13 @@ export const fetchGoods = () => async (dispatch: any) => {
     console.log(e);
   } finally {
     dispatch({
-      type: GOODS_LOADING,
+      type: GLOBAL_LOADING,
       payload: false,
     });
   }
 };
 
-export const fetchGoodById = (id: number) => async (dispatch: any) => {
+export const fetchGoodById = (id: number) => async (dispatch: Dispatch) => {
   try {
     const goodByIdUrl = `${ApiRoutes.Goods}/${id}`
     const payload = await http.get(goodByIdUrl);
@@ -38,10 +42,15 @@ export const fetchGoodById = (id: number) => async (dispatch: any) => {
   }
 };
 
-export const updateGoodById = (id: number, payload: any) => async (dispatch: any) => {
+export const updateGoodById = (id: number, payload: GoodInterface) => async (dispatch: Dispatch) => {
   try {
+    dispatch({
+      type: TYPES.GLOBAL_LOADING,
+      payload: true,
+    });
+
     const updateGoodById = `${ApiRoutes.Goods}/${id}`
-    const response =  await http.patch(updateGoodById, payload);
+    const response = await http.patch(updateGoodById, payload);
 
     dispatch({
       type: GOODS_UPDATE,
@@ -49,13 +58,21 @@ export const updateGoodById = (id: number, payload: any) => async (dispatch: any
     });
   } catch (e) {
     console.log(e);
+  } finally {
+    dispatch({
+      type: TYPES.GLOBAL_LOADING,
+      payload: false,
+    });
   }
 };
 
-
-export const createGood = (payload: any) => async (dispatch: any) => {
+export const createGood = (payload: GoodInterface) => async (dispatch: Dispatch) => {
   try {
-    const response =  await http.post(ApiRoutes.Goods, payload);
+    dispatch({
+      type: TYPES.GLOBAL_LOADING,
+      payload: true,
+    });
+    const response = await http.post(ApiRoutes.Goods, payload);
 
     dispatch({
       type: GOODS_UPDATE,
@@ -63,5 +80,10 @@ export const createGood = (payload: any) => async (dispatch: any) => {
     });
   } catch (e) {
     throw e;
+  } finally {
+    dispatch({
+      type: TYPES.GLOBAL_LOADING,
+      payload: false,
+    });
   }
 };

@@ -1,7 +1,7 @@
 import {Component} from "react";
 import Default from "../../layouts/default";
 import {connect} from "react-redux";
-import {fetchGoodById} from "../../store/actions/goods";
+import {fetchGoodById} from "../../store/actions";
 import EditGoods from "../../components/goods/EditGoods";
 
 class Edit extends Component<any, any> {

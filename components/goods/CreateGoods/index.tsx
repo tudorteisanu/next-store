@@ -8,7 +8,7 @@ import Button from "../../form/Button";
 import FormTextarea from "../../form/FormTextarea";
 import FormSelect from "../../form/FormSelect";
 import {withRouter} from "next/router";
-import {createGood} from '../../../store/actions/goods'
+import {createGood} from '../../../store/actions'
 import {connect} from "react-redux";
 
 class CreateGood extends Component<any, any> {
@@ -69,45 +69,49 @@ class CreateGood extends Component<any, any> {
   render() {
     return (
       <Card>
-        <CardHeading title={this.title}/>
-        <form onSubmit={this.submit}>
-          <FormInput
-            label="Name"
-            errorMessages={this.state.errors.name}
-            onInput={(e: any) => this.onInput(e, "name")}
-          />
-          <FormTextarea
-            label="Description"
-            errorMessages={this.state.errors.description}
-            onInput={(e: any) => this.onInput(e, "description")}
-          />
-          <FormInput
-            label="Price"
-            type="number"
-            errorMessages={this.state.errors.price}
-            onInput={(e: any) => this.onInput(e, "price")}
-          />
-          <FormInput
-            label="Discount"
-            type="number"
-            errorMessages={this.state.errors.discount}
-            onInput={(e: any) => this.onInput(e, "discount")}
-          />
-          <FormSelect
-            items={[
-              {value: 1, text: "Category 1"},
-              {value: 2, text: "Category 2"},
-              {value: 3, text: "Category 3"},
-            ]}
-            label="Category id"
-            type="number"
-            errorMessages={this.state.errors.categoryId}
-            onChange={(e: any) => this.onInput(e, "categoryId")}
-          />
-          <FileUploader
-            errorMessages={this.state.errors.photoId} onUpload={(e: any) => this.setFile(e)}/>
-          <Button>Submit</Button>
-        </form>
+        <>
+          <CardHeading title={this.title}/>
+          <form onSubmit={this.submit}>
+            <FormInput
+              label="Name"
+              errorMessages={this.state.errors.name}
+              onInput={(e: any) => this.onInput(e, "name")}
+            />
+            <FormTextarea
+              label="Description"
+              errorMessages={this.state.errors.description}
+              onInput={(e: any) => this.onInput(e, "description")}
+            />
+            <FormInput
+              label="Price"
+              type="number"
+              errorMessages={this.state.errors.price}
+              onInput={(e: any) => this.onInput(e, "price")}
+            />
+            <FormInput
+              label="Discount"
+              type="number"
+              errorMessages={this.state.errors.discount}
+              onInput={(e: any) => this.onInput(e, "discount")}
+            />
+            <FormSelect
+              items={[
+                {value: 1, text: "Category 1"},
+                {value: 2, text: "Category 2"},
+                {value: 3, text: "Category 3"},
+              ]}
+              label="Category id"
+              type="number"
+              errorMessages={this.state.errors.categoryId}
+              onChange={(e: any) => this.onInput(e, "categoryId")}
+            />
+            <FileUploader
+              errorMessages={this.state.errors.photoId} onUpload={(e: any) => this.setFile(e)}/>
+            <Button>
+              <span>Submit</span>
+            </Button>
+          </form>
+        </>
       </Card>
     );
   }

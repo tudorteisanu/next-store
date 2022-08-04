@@ -20,11 +20,6 @@ export const fetchUsers = () => async (dispatch: Dispatch) => {
 
 export const fetchUserById = (id: number) => async (dispatch: Dispatch) => {
     try {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: true,
-        });
-
         const userByIdUrl = `${ApiRoutes.Users}/${id}`
         const payload = await http.get(userByIdUrl);
 
@@ -36,11 +31,6 @@ export const fetchUserById = (id: number) => async (dispatch: Dispatch) => {
         return payload
     } catch (e) {
         console.log(e);
-    } finally {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: false,
-        });
     }
 };
 

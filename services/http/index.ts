@@ -1,5 +1,6 @@
-import axios, {Axios} from "axios";
+import axios, {Axios, AxiosRequestConfig} from "axios";
 import {authInterceptor} from "../interceptors";
+import {store} from "../../store";
 
 export class HttpService {
   private readonly axios: Axios;
@@ -12,7 +13,19 @@ export class HttpService {
       },
     });
 
-    this.axios.interceptors.request.use(authInterceptor);
+    // this.axios.interceptors.request.use( (config: AxiosRequestConfig) => {
+    //   const storeState = store.getState();
+    //   const { credentials } = storeState.auth;
+    //
+    //   config.headers = {
+    //     ...config.headers,
+    //     Authorization: `Bearer ${credentials?.token}`,
+    //   };
+    //
+    //
+    //
+    //   return config;
+    // });
 
     this.axios.interceptors.response.use(
       function (response) {

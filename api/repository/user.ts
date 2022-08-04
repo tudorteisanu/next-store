@@ -4,9 +4,7 @@ import {UserInterface} from "../../ts/interfaces";
 export class UserRepository {
   async find(options: any={}): Promise<any> {
     try {
-       const data = await  db.user.findMany(options);
-      console.log(data)
-      return data;
+      return  await  db.user.findMany(options);
     } catch ( error ) {
       console.log( error );
     }

@@ -12,6 +12,9 @@ services:
     env_file:
       - .env.local
 
+    volumes:
+      - "./public/images:/app/public/images"
+
     networks:
       - web
 

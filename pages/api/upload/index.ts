@@ -4,6 +4,7 @@ import fs from 'fs'
 import {NextApiRequest, NextApiResponse} from "next";
 import {FileService} from "../../../api/services";
 import {join} from 'path'
+import axios from 'axios';
 
 // first we need to disable the default body parser
 export const config = {
@@ -12,13 +13,14 @@ export const config = {
   }
 };
 
-const saveFile = async (file: any) => {
-  const rootDir = join(process.cwd(), 'public')
-  const imagesDir = 'images'
 
+function getPubicPath(filename: string, imagesDir = 'images'): string {
+  return join('storage/static', filename)
+}
+
+const saveFile = async (file: any) => {
   const filename = `${file.newFilename}.${file.mimetype.split('/')[1]}`
-  const filePublicUrl = `/${imagesDir}/${filename}`
-  const filePath = `${rootDir}${filePublicUrl}`
+  const filePath = getPubicPath(filename)
   const data = fs.readFileSync(file.filepath);
 
   fs.writeFileSync(filePath, data);
@@ -30,7 +32,7 @@ const saveFile = async (file: any) => {
     mimetype: file.mimetype,
     size: file.size,
     path: filePath,
-    url: filePublicUrl
+    url: `/static/${filename}`
   };
 };
 

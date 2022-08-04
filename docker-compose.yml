@@ -10,10 +10,27 @@ services:
       - '3000:3000'
 
     env_file:
-      - .env.local
+      - .env
 
     volumes:
-      - "./public/images:/app/public/images"
+      - "./storage/static:/app/storage/static"
+
+    networks:
+      - web
+
+  storage:
+    build:
+      context: storage/
+      dockerfile: Dockerfile
+
+    ports:
+      - '8000:8000'
+
+    env_file:
+      - .env
+
+    volumes:
+      - "./storage/static:/app/static"
 
     networks:
       - web
@@ -31,7 +48,7 @@ services:
 
 
     env_file:
-      - .env.local
+      - .env
 
     expose:
       - 5432

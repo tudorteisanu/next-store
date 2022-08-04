@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: false,
+    swcMinify: true,
     output: 'standalone',
     i18n: {
         locales: ["en"],
@@ -9,7 +9,16 @@ const nextConfig = {
     },
     productionBrowserSourceMaps: true,
     images: {
-        domains: ['template.nanoit.dev']
+        domains: ['template.nanoit.dev'],
+    },
+    async redirects() {
+        return [
+            {
+                source: '/static/:path',
+                destination: 'http://localhost:8000/static/:path',
+                permanent: false
+            }
+        ];
     }
 }
 

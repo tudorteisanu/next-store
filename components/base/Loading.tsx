@@ -1,7 +1,28 @@
 import { Component } from "react";
+import {withRouter} from "next/router";
+import {WithRouterProps} from "next/dist/client/with-router";
 
-class Loading extends Component {
+class Loading extends Component<WithRouterProps> {
+  state: any = {
+    loading: false
+  }
+
+  componentDidMount() {
+    this.props.router.events.on('routeChangeStart', (url: string) => {
+      this.setState({loading: true})
+    })
+    this.props.router.events.on('routeChangeComplete', (url: string) => {
+      this.setState({loading: false})
+    })
+    this.props.router.events.on('routeChangeError', (url: string) => {
+      this.setState({loading: false})
+    })
+  }
+
   render() {
+    if (!this.state.loading) {
+      return <></>
+    }
     return (
       <div className="fixed bg-gray-900/50 flex items-center justify-center w-full h-full top-0 left-0">
         <div className={"flex items-center justify-center flex-col"}>
@@ -27,4 +48,4 @@ class Loading extends Component {
   }
 }
 
-export default  Loading
+export default  withRouter(Loading)

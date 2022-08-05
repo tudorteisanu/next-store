@@ -4,27 +4,37 @@ import {PayloadAction} from "@reduxjs/toolkit";
 import {CategoryInterface} from "../../ts/interfaces";
 
 
-interface CategoriesStoreInterface  {
-  items: Array<CategoryInterface>;
+interface CategoriesStoreInterface {
+  data: Array<CategoryInterface>;
   loading: boolean;
+  page: number;
+  itemsPerPage?: number;
 }
 
 const initialData: CategoriesStoreInterface = {
-  items: [],
+  data: [],
+  page: 1,
+  itemsPerPage: 10,
   loading: false,
 };
 
 const categoriesReducer = (state = initialData, action: PayloadAction<CategoriesStoreInterface>) => {
   switch (action.type) {
     case types.LOAD_CATEGORIES:
-      return { ...state, items: action.payload };
+      return {
+        ...state,
+        ...action.payload,
+      };
     case types.CATEGORIES_LOADING:
-      return { ...state, loading: action.payload };
+      return {...state, loading: action.payload};
     case types.UPDATE_CATEGORIES:
-      return { ...state, items: updateExistingOrPush(state.items, action.payload, 'id') };
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }
 };
 
-export { categoriesReducer };
+export {categoriesReducer};

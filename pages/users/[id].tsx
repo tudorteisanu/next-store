@@ -8,7 +8,7 @@ class Edit extends Component<any, any> {
   static getInitialProps(ctx: any) {
     const { id } = ctx.query
     if (id) {
-      return {id: Number(id)}
+      return {id}
     }
     return {}
   }

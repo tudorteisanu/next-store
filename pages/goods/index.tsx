@@ -23,7 +23,7 @@ class Index extends React.Component<any, IState> {
                 <NavLink href={PageRoutes.GoodsCreate}>
                   <button className="bg-blue-700 text-gray-100 py-2 px-5 rounded-md mb-3">Add goods</button>
                 </NavLink>
-                <GoodList goods={this.props.goods}/>
+                <GoodList />
               </div>
           </div>
       </Default>
@@ -33,7 +33,7 @@ class Index extends React.Component<any, IState> {
 
 const mapStateToProps = (state: any) => {
   return {
-    goods: state.goods.items,
+    goods: state.goods.data,
     loading: state.goods.loading,
   };
 };

@@ -6,7 +6,6 @@ interface IProps {
 }
 interface IState {}
 
-
 export default class Auth extends React.Component<IProps, IState> {
   render() {
     return (
@@ -23,3 +22,4 @@ export default class Auth extends React.Component<IProps, IState> {
   );
   }
 }
+

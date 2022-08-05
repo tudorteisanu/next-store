@@ -3,22 +3,36 @@ import Header from "../components/navigation/Header";
 import {UserInterface} from "../ts/interfaces";
 import Loading from "../components/base/Loading";
 import PageHead from "../components/layout/PageHead";
-import {connect} from "react-redux";
+import {withRouter} from "next/router";
+import {WithRouterProps} from "next/dist/client/with-router";
 
 interface IProps {
   children?: any;
-  loading: boolean;
 }
 
 interface IState {
-  user: UserInterface;
+  user?: UserInterface;
   loading: boolean;
 }
 
-class Default extends React.Component<IProps, IState> {
+class Default extends React.Component<IProps & WithRouterProps, IState> {
+  state: IState = {
+    loading: false
+  }
+  componentDidMount() {
+    this.props.router.events.on('routeChangeStart', (url: string) => {
+      this.setState({loading: true})
+    })
+    this.props.router.events.on('routeChangeComplete', (url: string) => {
+        this.setState({loading: false})
+    })
+    this.props.router.events.on('routeChangeError', (url: string) => {
+        this.setState({loading: false})
+    })
+  }
 
   get content(): JSX.Element {
-    if (this.props.loading) {
+    if (this.state.loading) {
       return <Loading/>
     }
 
@@ -37,10 +51,4 @@ class Default extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    loading: state.loading,
-  };
-};
-
-export default connect(mapStateToProps)(Default)
+export default withRouter(Default);

@@ -1,0 +1,14 @@
+FROM node:16-alpine
+
+RUN apk --no-cache add yarn --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+RUN yarn global add next
+WORKDIR /app
+
+COPY . .
+
+RUN yarn
+
+ENV NODE_ENV development
+
+CMD ["true"]
+

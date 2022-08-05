@@ -7,11 +7,6 @@ import {CategoryInterface} from "../../ts/interfaces";
 
 export const fetchCategories = () => async (dispatch: Dispatch) => {
   try {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: true,
-    });
-
     const payload = await http.get(ApiRoutes.Categories);
 
     dispatch({
@@ -20,11 +15,6 @@ export const fetchCategories = () => async (dispatch: Dispatch) => {
     });
   } catch (e) {
     console.log(e);
-  } finally {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: false,
-    });
   }
 };
 

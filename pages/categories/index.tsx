@@ -28,7 +28,7 @@ class Categories extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => {
   return {
-    categories: state.categories.items,
+    categories: state.categories.data,
   };
 };
 

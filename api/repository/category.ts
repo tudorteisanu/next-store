@@ -1,5 +1,4 @@
 import db from "../database";
-import { CreateCategoryInterface} from "../../ts/interfaces";
 import {PrismaClient} from "@prisma/client";
 
 export class CategoryRepository {
@@ -9,12 +8,16 @@ export class CategoryRepository {
     this.db = db;
   }
 
-  async find(where: any = {}): Promise<any> {
+  async find(params: any = {}): Promise<any> {
     try {
-      return  await this.db.category.findMany({where, include: {photo: true}});
+      return  await this.db.category.findMany(params);
     } catch (error) {
       throw error;
     }
+  }
+
+  async getCount(): Promise<number> {
+    return await this.db.category.count()
   }
 
   async create(data: any): Promise<any> {

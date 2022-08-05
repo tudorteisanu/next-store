@@ -8,7 +8,7 @@ import Button from "../../form/Button";
 import FormTextarea from "../../form/FormTextarea";
 import FormSelect from "../../form/FormSelect";
 import {withRouter} from "next/router";
-import {createGood} from '../../../store/actions'
+import {createGood, fetchCategories} from '../../../store/actions'
 import {connect} from "react-redux";
 
 class CreateGood extends Component<any, any> {
@@ -18,6 +18,10 @@ class CreateGood extends Component<any, any> {
       model: {} as any,
       errors: {}
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchCategories()
   }
 
   setFile(photoId: number) {
@@ -95,11 +99,10 @@ class CreateGood extends Component<any, any> {
               onInput={(e: any) => this.onInput(e, "discount")}
             />
             <FormSelect
-              items={[
-                {value: 1, text: "Category 1"},
-                {value: 2, text: "Category 2"},
-                {value: 3, text: "Category 3"},
-              ]}
+              items={this.props.categories.map((item: any) => ({
+                value: item.id,
+                text: item.name
+              }))}
               label="Category id"
               type="number"
               errorMessages={this.state.errors.categoryId}
@@ -117,4 +120,8 @@ class CreateGood extends Component<any, any> {
   }
 }
 
-export default connect(null, {createGood})(withRouter(CreateGood))
+const maoStateToProps = (state: any) => {
+  return {categories: state.categories.data}
+}
+
+export default connect(maoStateToProps, {createGood, fetchCategories})(withRouter(CreateGood))

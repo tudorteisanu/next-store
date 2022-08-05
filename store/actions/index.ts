@@ -22,9 +22,3 @@ export {
   fetchUsers,
   updateUserById
 } from './users'
-
-
-export {
-  hideLoading,
-  showLoading
-} from './loading'

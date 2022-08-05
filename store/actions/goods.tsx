@@ -4,26 +4,26 @@ import {ApiRoutes} from "../../ts/enum";
 import * as TYPES from "../types";
 import {Dispatch} from "redux";
 import {GoodInterface} from "../../ts/interfaces";
+import {PaginationQueryInterface} from "../../ts/interfaces/pagination";
+import {DEFAULT_PAGINATION_CONFIG} from "../../ts/consts";
 
-export const fetchGoods = () => async (dispatch: Dispatch) => {
+export const fetchGoods = (query: PaginationQueryInterface = {}) => async (dispatch: Dispatch) => {
   try {
-    dispatch({
-      type: GLOBAL_LOADING,
-      payload: true,
-    });
-    const payload = await http.get(ApiRoutes.Goods);
+    const params = {
+      ...DEFAULT_PAGINATION_CONFIG,
+      ...query
+    }
+
+    const payload = await http.get(ApiRoutes.Goods, {params});
 
     dispatch({
       type: LOAD_GOODS,
       payload,
     });
+
+    return payload
   } catch (e) {
     console.log(e);
-  } finally {
-    dispatch({
-      type: GLOBAL_LOADING,
-      payload: false,
-    });
   }
 };
 
@@ -44,11 +44,6 @@ export const fetchGoodById = (id: number) => async (dispatch: Dispatch) => {
 
 export const updateGoodById = (id: number, payload: GoodInterface) => async (dispatch: Dispatch) => {
   try {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: true,
-    });
-
     const updateGoodById = `${ApiRoutes.Goods}/${id}`
     const response = await http.patch(updateGoodById, payload);
 
@@ -58,20 +53,11 @@ export const updateGoodById = (id: number, payload: GoodInterface) => async (dis
     });
   } catch (e) {
     console.log(e);
-  } finally {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: false,
-    });
   }
 };
 
 export const createGood = (payload: GoodInterface) => async (dispatch: Dispatch) => {
   try {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: true,
-    });
     const response = await http.post(ApiRoutes.Goods, payload);
 
     dispatch({
@@ -80,10 +66,5 @@ export const createGood = (payload: GoodInterface) => async (dispatch: Dispatch)
     });
   } catch (e) {
     throw e;
-  } finally {
-    dispatch({
-      type: TYPES.GLOBAL_LOADING,
-      payload: false,
-    });
   }
 };

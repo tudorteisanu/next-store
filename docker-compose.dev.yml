@@ -2,9 +2,14 @@ version: '3.3'
 
 services:
   web:
-    build:
-      context: .
-      dockerfile: codedeploy/Dockerfile
+
+    image: node:16
+
+    command: npm run dev
+
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
 
     env_file:
       - .env
@@ -12,14 +17,12 @@ services:
     ports:
       - "3000:3000"
 
-    volumes:
-      - "./:/app:delegated"
-
     networks:
       - backend
 
     environment:
       VIRTUAL_HOST: next-store.local
+      HOST: 0.0.0.0
 
   nginx-proxy:
     build:

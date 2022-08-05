@@ -15,7 +15,7 @@ export const config = {
 
 
 function getPubicPath(filename: string, imagesDir = 'images'): string {
-  return join('storage/static', filename)
+  return join('storage/public', filename)
 }
 
 const saveFile = async (file: any) => {
@@ -32,7 +32,7 @@ const saveFile = async (file: any) => {
     mimetype: file.mimetype,
     size: file.size,
     path: filePath,
-    url: `/static/${filename}`
+    url: `/public/${filename}`
   };
 };
 

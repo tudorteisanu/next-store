@@ -3,7 +3,7 @@ import FormInput from "../../form/FormInput";
 import FileUploader from "../../form/FIleUploader";
 import Button from "../../form/Button";
 import {connect} from "react-redux";
-import {fetchGoodById, updateGoodById} from "../../../store/actions";
+import {fetchGoodById, updateGoodById, fetchCategories} from "../../../store/actions";
 import FormTextarea from "../../form/FormTextarea";
 import FormSelect from "../../form/FormSelect";
 import {withRouter} from "next/router";
@@ -30,6 +30,7 @@ class Form extends Component<any, any> {
       ...this.state,
       ...response
   })
+    this.props.fetchCategories()
   }
 
   setFile(photoId: number) {
@@ -91,11 +92,10 @@ class Form extends Component<any, any> {
           onInput={(e: any) => this.onInput(e, "discount")}
         />
         <FormSelect
-          items={[
-            {value: 1, text: "Category 1"},
-            {value: 2, text: "Category 2"},
-            {value: 3, text: "Category 3"},
-          ]}
+          items={this.props.categories.map((item: any) => ({
+            value: item.id,
+            text: item.name
+          }))}
           label="Category id"
           type="number"
           value={this.state.categoryId}
@@ -112,7 +112,14 @@ class Form extends Component<any, any> {
 
 const mapDispatchToProps = {
   fetchGoodById,
-  updateGoodById
+  updateGoodById,
+  fetchCategories
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Form))
+const mapStateToProps = (state: any) => {
+  return {
+    categories: state.categories.data
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Form))

@@ -98,7 +98,7 @@ class Form extends Component<FormProps, FormState> {
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    category: state.categories.items.find((item: any) => item.id === ownProps.categoryId),
+    category: state.categories.data.find((item: any) => item.id === ownProps.categoryId),
   }
 }
 

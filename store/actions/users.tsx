@@ -36,11 +36,6 @@ export const fetchUserById = (id: number) => async (dispatch: Dispatch) => {
 
 export const updateUserById = (id: number, data: UserInterface) => async (dispatch: Dispatch) => {
     try {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: true,
-        });
-
         const userByIdUrl = `${ApiRoutes.Users}/${id}`
         const payload = await http.patch(userByIdUrl, data);
 
@@ -51,21 +46,11 @@ export const updateUserById = (id: number, data: UserInterface) => async (dispat
         return payload
     } catch (e: any) {
         throw e
-    } finally {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: false,
-        });
     }
 };
 
 export const createUser = (data: UserInterface) => async (dispatch: Dispatch) => {
     try {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: true,
-        });
-
         const payload = await http.post(ApiRoutes.Users, data);
 
         dispatch({
@@ -75,10 +60,5 @@ export const createUser = (data: UserInterface) => async (dispatch: Dispatch) =>
         return payload
     } catch (e: any) {
         throw e
-    } finally {
-        dispatch({
-            type: TYPES.GLOBAL_LOADING,
-            payload: false,
-        });
     }
 };

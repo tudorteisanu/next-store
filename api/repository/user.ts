@@ -2,9 +2,15 @@ import db from "../database";
 import {UserInterface} from "../../ts/interfaces";
 
 export class UserRepository {
+  repository;
+
+  constructor() {
+    this.repository = (db  as any).user
+  }
+
   async find(options: any={}): Promise<any> {
     try {
-      return  await  db.user.findMany(options);
+      return  await  this.repository.findMany(options);
     } catch ( error ) {
       console.log( error );
     }
@@ -12,7 +18,7 @@ export class UserRepository {
 
   async create(data: UserInterface): Promise<any> {
     try {
-       await  db.user.create({data});
+       await  this.repository.create({data});
     } catch ( error ) {
       console.log( error );
     }
@@ -20,7 +26,7 @@ export class UserRepository {
 
   async findOne(where: any): Promise<any> {
     try {
-     return await db.user.findUniqueOrThrow({where});
+     return await this.repository.findUniqueOrThrow({where});
     } catch ( error ) {
       throw error;
     }
@@ -28,7 +34,7 @@ export class UserRepository {
 
   async update(where: any, data: Partial<UserInterface>): Promise<any> {
     try {
-     return await db.user.update({where, data});
+     return await this.repository.update({where, data});
     } catch ( error ) {
       throw error;
     }
@@ -36,7 +42,7 @@ export class UserRepository {
 
   async delete(where: any): Promise<any> {
     try {
-     return await db.user.delete({where});
+     return await this.repository.delete({where});
     } catch ( error ) {
       throw error;
     }

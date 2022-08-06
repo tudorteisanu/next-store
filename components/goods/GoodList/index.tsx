@@ -20,6 +20,10 @@ interface IProps {
 class GoodList extends Component<any, IState> {
   onPageChange = (page: number): void => {
     this.props.fetchGoods({page})
+
+    setTimeout(()=> {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 200)
   }
 
   render() {

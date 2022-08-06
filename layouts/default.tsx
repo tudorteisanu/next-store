@@ -5,6 +5,7 @@ import Loading from "../components/base/Loading";
 import PageHead from "../components/layout/PageHead";
 import {withRouter} from "next/router";
 import {WithRouterProps} from "next/dist/client/with-router";
+import {store} from "../store";
 
 interface IProps {
   children?: any;
@@ -20,6 +21,7 @@ class Default extends React.Component<IProps & WithRouterProps, IState> {
     loading: false
   }
   componentDidMount() {
+    const state = store.getState()
     this.props.router.events.on('routeChangeStart', (url: string) => {
       this.setState({loading: true})
     })

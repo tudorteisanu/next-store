@@ -1,6 +1,7 @@
 import axios, {Axios, AxiosRequestConfig} from "axios";
 import {authInterceptor} from "../interceptors";
-import {store} from "../../store";
+import {PageRoutes} from "../../ts/enum";
+import router from "next/router";
 
 export class HttpService {
   private readonly axios: Axios;
@@ -13,25 +14,18 @@ export class HttpService {
       },
     });
 
-    // this.axios.interceptors.request.use( (config: AxiosRequestConfig) => {
-    //   const storeState = store.getState();
-    //   const { credentials } = storeState.auth;
-    //
-    //   config.headers = {
-    //     ...config.headers,
-    //     Authorization: `Bearer ${credentials?.token}`,
-    //   };
-    //
-    //
-    //
-    //   return config;
-    // });
+    this.axios.interceptors.request.use( authInterceptor)
 
     this.axios.interceptors.response.use(
       function (response) {
         return response.data;
       },
       function (error) {
+        if (error.response.status === 401) {
+          if (process.browser) {
+            router.push(PageRoutes.Login)
+          }
+        }
         return Promise.reject(error.response.data);
       }
     );

@@ -14,17 +14,14 @@ interface CategoriesStoreInterface {
 const initialData: CategoriesStoreInterface = {
   data: [],
   page: 1,
-  itemsPerPage: 10,
+  itemsPerPage: 12,
   loading: false,
 };
 
 const categoriesReducer = (state = initialData, action: PayloadAction<CategoriesStoreInterface>) => {
   switch (action.type) {
     case types.LOAD_CATEGORIES:
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return { ...state, ...action.payload };
     case types.CATEGORIES_LOADING:
       return {...state, loading: action.payload};
     case types.UPDATE_CATEGORIES:

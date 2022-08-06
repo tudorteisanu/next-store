@@ -19,7 +19,6 @@ class Form extends Component<any, any> {
   }
 
   async componentDidMount() {
-    console.log(this.props)
     const response = await this.props.fetchUserById(this.props.userId)
     this.setState({
       ...this.state,

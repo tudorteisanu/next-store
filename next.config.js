@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: process.env.NODE_ENV === 'production',
+    swcMinify: true,
     output: process.env.NODE_ENV === 'production' ? 'standalone' : "",
     i18n: {
         locales: ["en"],

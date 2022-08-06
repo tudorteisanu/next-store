@@ -39,4 +39,4 @@ yarn-error.log*
 
 public/images/*
 venv
-storage/static
+storage/public

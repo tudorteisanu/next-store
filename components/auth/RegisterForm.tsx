@@ -1,13 +1,14 @@
 import React from "react";
 import FormInput from "../form/FormInput";
 import NavLink from 'next/link';
-import { ApiRoutes, PageRoutes } from "../../ts/enum";
+import {ApiRoutes, PageRoutes} from "../../ts/enum";
 import Button from "../form/Button";
 import Checkbox from "../form/Checkbox";
 import Card from "../base/Card";
 import LoginFooter from "./LoginFooter";
 import CardHeading from "../base/CardHeading";
 import HttpService from "../../services/http";
+import {router} from "next/client";
 
 export default class RegisterForm extends React.Component<any, any> {
   private http;
@@ -15,7 +16,7 @@ export default class RegisterForm extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      form: { email: "", password: "" },
+      form: {email: "", password: ""},
     };
     this.http = HttpService;
   }
@@ -23,7 +24,7 @@ export default class RegisterForm extends React.Component<any, any> {
   onInput(event: any, key: string): void {
     this.setState({
       ...this.state,
-      form: { ...this.state.form, [key]: event.target.value },
+      form: {...this.state.form, [key]: event.target.value},
     });
   }
 
@@ -31,7 +32,7 @@ export default class RegisterForm extends React.Component<any, any> {
     try {
       event.preventDefault();
       await this.http.post(ApiRoutes.Register, this.state.form);
-      window.location.href  = PageRoutes.Login;
+      await router.push(PageRoutes.Login)
     } catch (e) {
       console.log(e);
     }
@@ -40,8 +41,8 @@ export default class RegisterForm extends React.Component<any, any> {
   render() {
     return (
       <Card
-        footer={<LoginFooter />}
-        header={<CardHeading title={"Create New Account"} />}
+        footer={<LoginFooter/>}
+        header={<CardHeading title={"Create New Account"}/>}
       >
         {" "}
         <form className="space-y-6" onSubmit={this.register}>
@@ -61,7 +62,7 @@ export default class RegisterForm extends React.Component<any, any> {
           />
 
           <div className="flex items-center justify-between">
-            <Checkbox label="Remember me" />
+            <Checkbox label="Remember me"/>
             <div className="text-sm">
               <NavLink
                 href={PageRoutes.Login}

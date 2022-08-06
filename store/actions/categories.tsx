@@ -4,10 +4,17 @@ import {ApiRoutes} from "../../ts/enum";
 import * as TYPES from "../types";
 import {Dispatch} from "redux";
 import {CategoryInterface} from "../../ts/interfaces";
+import {DEFAULT_PAGINATION_CONFIG} from "../../ts/consts";
+import {PaginationQueryInterface} from "../../ts/interfaces/pagination";
 
-export const fetchCategories = () => async (dispatch: Dispatch) => {
+export const fetchCategories = (query: PaginationQueryInterface) => async (dispatch: Dispatch) => {
   try {
-    const payload = await http.get(ApiRoutes.Categories);
+
+    const params = {
+      ...DEFAULT_PAGINATION_CONFIG,
+      ...query
+    }
+    const payload = await http.get(ApiRoutes.Categories, {params});
 
     dispatch({
       type: LOAD_CATEGORIES,

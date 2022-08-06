@@ -1,6 +1,7 @@
 export {
   login,
-  setToken
+  setToken,
+  logout
 } from './auth'
 
 export {

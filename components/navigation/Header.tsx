@@ -1,19 +1,20 @@
-import React from "react";
+import React, {Fragment} from "react";
 import NavLink from 'next/link';
-import { PageRoutes } from "../../ts/enum";
+import {PageRoutes} from "../../ts/enum";
 import {withRouter} from "next/router";
+import AdditionalLinks from "./AdditionalLinks";
 
 class Header extends React.Component<any, any> {
   protected readonly links = [
-    { to: PageRoutes.Home, name: "Home" },
-    { to: PageRoutes.Goods, name: "Goods" },
-    { to: PageRoutes.Categories, name: "Categories" },
-    { to: PageRoutes.Users, name: "Users" },
+    {to: PageRoutes.Home, name: "Home"},
+    {to: PageRoutes.Goods, name: "Goods"},
+    {to: PageRoutes.Categories, name: "Categories"},
+    {to: PageRoutes.Users, name: "Users"},
   ];
 
   protected readonly additionalLinks = [
-    { to: PageRoutes.Login, name: "Login" },
-    { to: PageRoutes.Register, name: "Register" },
+    {to: PageRoutes.Login, name: "Login"},
+    {to: PageRoutes.Register, name: "Register"},
   ]
 
   linkClass(link: string): string {
@@ -34,10 +35,10 @@ class Header extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="w-full p-5 bg-blue-800 text-white flex items-center justify-between"  >
+      <div className="w-full p-5 bg-blue-800 text-white flex items-center justify-between">
         <div>
           {this.links.map((link, i) => (
-            <NavLink href={link.to} key={i} >
+            <NavLink href={link.to} key={i}>
             <span className={this.linkClass(link.to)}>
             {link.name}
             </span>
@@ -45,13 +46,7 @@ class Header extends React.Component<any, any> {
           ))}
         </div>
         <div>
-          {this.additionalLinks.map((link, i) => (
-            <NavLink href={link.to} key={i} >
-            <span className={this.linkClass(link.to)}>
-            {link.name}
-            </span>
-            </NavLink>
-          ))}
+          <AdditionalLinks />
         </div>
       </div>
     );

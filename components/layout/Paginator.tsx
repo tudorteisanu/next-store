@@ -31,12 +31,20 @@ export default class Paginator extends Component<PaginatorPropsInterface> {
     return this.totalPages
   }
 
+  get component(): JSX.Element {
+    if (this.props.pages > 1) {
+      return (<div className="flex items-center justify-center">
+        {this.pagesToDisplay.map((page: number, index)=> this.pageItem(page, index))}
+      </div>)
+    }
+    return <></>
+  }
+
   render() {
     if (!this.props.pages) {
       return;
     }
-    return (<div className="flex items-center justify-center">
-      {this.pagesToDisplay.map((page: number, index)=> this.pageItem(page, index))}
-    </div>);
+
+    return this.component;
   }
 }

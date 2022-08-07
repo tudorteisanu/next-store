@@ -4,12 +4,6 @@ import {DEFAULT_PAGINATION_CONFIG} from "../../ts/consts";
 import {CategoryFiltersInterface, PaginationInterface, PaginationQueryInterface} from "../../ts/interfaces/pagination";
 
 export class CategoryService {
-  categoryRepository: CategoryRepository;
-
-  constructor() {
-    this.categoryRepository = new CategoryRepository()
-  }
-
   async find(params: PaginationQueryInterface & CategoryFiltersInterface):
     Promise<PaginationInterface<CategoryInterface>> {
     const pagination = {
@@ -30,7 +24,7 @@ export class CategoryService {
       where.name = {contains: params.name};
     }
 
-    const data = await this.categoryRepository.find({
+    const data = await CategoryRepository.find({
       skip,
       take,
       where,
@@ -39,7 +33,7 @@ export class CategoryService {
       }
     });
 
-    const totalItems = await this.categoryRepository.getCount();
+    const totalItems = await CategoryRepository.getCount();
 
     const lastPage = Math.ceil(totalItems / itemsPerPage);
 
@@ -52,18 +46,18 @@ export class CategoryService {
   }
 
   async findOne(id: number): Promise<CategoryInterface> {
-    return await this.categoryRepository.findOne({id})
+    return await CategoryRepository.findOne({id})
   }
 
   async create(data: any): Promise<CategoryInterface> {
-    return await this.categoryRepository.create(data)
+    return await CategoryRepository.create(data)
   }
 
   async update(id: number, data: CategoryInterface): Promise<CategoryInterface> {
-    return await this.categoryRepository.update({id}, data)
+    return await CategoryRepository.update({id}, data)
   }
 
   async delete(id: number): Promise<CategoryInterface> {
-    return await this.categoryRepository.delete({id})
+    return await CategoryRepository.delete({id})
   }
 }

@@ -1,7 +1,7 @@
 import db from "../database";
 
 export class FileRepository {
-  async create(data: any): Promise<any> {
+  static async create(data: any): Promise<any> {
     try {
        return await  db.file.create({data});
     } catch ( error ) {
@@ -9,7 +9,7 @@ export class FileRepository {
     }
   }
 
-  async delete(where: any): Promise<any> {
+  static async delete(where: any): Promise<any> {
     try {
      return await db.user.delete({where});
     } catch ( error ) {

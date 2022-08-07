@@ -1,26 +1,19 @@
 import db from "../database";
-import {PrismaClient} from "@prisma/client";
 
-export class CategoryRepository {
-  db: PrismaClient;
-
-  constructor() {
-    this.db = db;
-  }
-
-  async find(params: any = {}): Promise<any> {
+export  class CategoryRepository {
+  static async find(params: any = {}): Promise<any> {
     try {
-      return  await this.db.category.findMany(params);
+      return  await db.category.findMany(params);
     } catch (error) {
       throw error;
     }
   }
 
-  async getCount(): Promise<number> {
-    return await this.db.category.count()
+  static async getCount(): Promise<number> {
+    return await db.category.count()
   }
 
-  async create(data: any): Promise<any> {
+  static async create(data: any): Promise<any> {
     try {
       await db.category.create({data});
     } catch (error) {
@@ -28,7 +21,7 @@ export class CategoryRepository {
     }
   }
 
-  async findOne(where: any): Promise<any> {
+  static async findOne(where: any): Promise<any> {
     try {
       return await db.category.findUniqueOrThrow({where, include: {photo: true}});
     } catch (error) {
@@ -36,7 +29,7 @@ export class CategoryRepository {
     }
   }
 
-  async update(where: any, payload: any): Promise<any> {
+  static async update(where: any, payload: any): Promise<any> {
     try {
       const {photo, ...data} = payload;
       return await db.category.update({where, data});
@@ -45,7 +38,7 @@ export class CategoryRepository {
     }
   }
 
-  async delete(where: any): Promise<any> {
+  static async delete(where: any): Promise<any> {
     try {
       return await db.category.delete({where});
     } catch (error) {

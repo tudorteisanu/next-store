@@ -1,55 +1,48 @@
-import db from "../database";
-import {PrismaClient} from "@prisma/client";
+import repository from "../database";
 
 export class GoodRepository {
-  repository: any;
-
-  constructor() {
-    this.repository = db.good;
-  }
-
-  async find(params: any={}): Promise<any> {
+  static async find(params: any={}): Promise<any> {
     try {
-       return await  this.repository.findMany(params);
+       return await  repository.good.findMany(params);
     } catch ( error ) {
       throw error;
     }
   }
 
-  async create(data: any): Promise<any> {
+  static async create(data: any): Promise<any> {
     try {
-       await  this.repository.create({data});
+       await  repository.good.create({data});
     } catch ( error ) {
       throw error;
     }
   }
 
-  async findOne(params: any): Promise<any> {
+  static async findOne(params: any): Promise<any> {
     try {
-     return await this.repository.findUniqueOrThrow(params);
+     return await repository.good.findUniqueOrThrow(params);
     } catch ( error ) {
       throw error;
     }
   }
 
-  async update(where: any, payload: Partial<any>): Promise<any> {
+  static async update(where: any, payload: Partial<any>): Promise<any> {
     try {
       const {photo, ...data} = payload;
-     return await this.repository.update({where, data});
+     return await repository.good.update({where, data});
     } catch ( error ) {
       throw error;
     }
   }
 
-  async delete(where: any): Promise<any> {
+  static async delete(where: any): Promise<any> {
     try {
-     return await this.repository.delete({where});
+     return await repository.good.delete({where});
     } catch ( error ) {
       throw error;
     }
   }
 
-  public  async getCount(): Promise<number> {
-    return this.repository.count()
+  static  async getCount(): Promise<number> {
+    return repository.good.count()
   }
 }

@@ -1,7 +1,6 @@
-import {CategoryInterface, GoodInterface} from "../../ts/interfaces";
+import {GoodInterface} from "../../ts/interfaces";
 import {GoodRepository} from "../repository";
 import {
-  CategoryFiltersInterface,
   GoodsFiltersInterface,
   PaginationInterface,
   PaginationQueryInterface
@@ -9,12 +8,6 @@ import {
 import {DEFAULT_PAGINATION_CONFIG} from "../../ts/consts";
 
 export class GoodService {
-  goodRepository: GoodRepository;
-
-  constructor() {
-    this.goodRepository = new GoodRepository()
-  }
-
   async find(params: PaginationQueryInterface & GoodsFiltersInterface):
     Promise<PaginationInterface<GoodInterface>> {
 
@@ -36,7 +29,7 @@ export class GoodService {
       where.name = {contains: params.name};
     }
 
-    const data = await this.goodRepository.find({
+    const data = await GoodRepository.find({
       skip,
       take,
       where,
@@ -45,7 +38,7 @@ export class GoodService {
       }
     });
 
-    const totalItems = await this.goodRepository.getCount();
+    const totalItems = await GoodRepository.getCount();
 
     const lastPage = Math.ceil(totalItems / itemsPerPage);
 
@@ -58,18 +51,18 @@ export class GoodService {
   }
 
   async findOne(id: number): Promise<GoodInterface> {
-    return await this.goodRepository.findOne({where: {id}, include: {photo: true}})
+    return await GoodRepository.findOne({where: {id}, include: {photo: true}})
   }
 
   async create(data: GoodInterface): Promise<GoodInterface> {
-    return await this.goodRepository.create(data)
+    return await GoodRepository.create(data)
   }
 
   async update(id: number, data: GoodInterface): Promise<GoodInterface> {
-    return await this.goodRepository.update({id}, data)
+    return await GoodRepository.update({id}, data)
   }
 
   async delete(id: number): Promise<GoodInterface> {
-    return await this.goodRepository.delete({id})
+    return await GoodRepository.delete({id})
   }
 }

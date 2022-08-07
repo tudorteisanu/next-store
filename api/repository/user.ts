@@ -2,47 +2,41 @@ import db from "../database";
 import {UserInterface} from "../../ts/interfaces";
 
 export class UserRepository {
-  repository;
-
-  constructor() {
-    this.repository = (db  as any).user
-  }
-
-  async find(options: any={}): Promise<any> {
+   static async find(options: any={}): Promise<any> {
     try {
-      return  await  this.repository.findMany(options);
+      return  await  db.user.findMany(options);
     } catch ( error ) {
       console.log( error );
     }
   }
 
-  async create(data: UserInterface): Promise<any> {
+  static async create(data: UserInterface): Promise<any> {
     try {
-       await  this.repository.create({data});
+       await  db.user.create({data});
     } catch ( error ) {
       console.log( error );
     }
   }
 
-  async findOne(where: any): Promise<any> {
+  static async findOne(where: any): Promise<any> {
     try {
-     return await this.repository.findUniqueOrThrow({where});
+     return await db.user.findUniqueOrThrow({where});
     } catch ( error ) {
       throw error;
     }
   }
 
-  async update(where: any, data: Partial<UserInterface>): Promise<any> {
+  static async update(where: any, data: Partial<UserInterface>): Promise<any> {
     try {
-     return await this.repository.update({where, data});
+     return await db.user.update({where, data});
     } catch ( error ) {
       throw error;
     }
   }
 
-  async delete(where: any): Promise<any> {
+  static async delete(where: any): Promise<any> {
     try {
-     return await this.repository.delete({where});
+     return await db.user.delete({where});
     } catch ( error ) {
       throw error;
     }

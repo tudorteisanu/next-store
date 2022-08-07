@@ -2,33 +2,27 @@ import {UserInterface} from "../../ts/interfaces";
 import {UserRepository} from "../repository";
 
 export class UserService {
-  userRepository: UserRepository;
-
-  constructor() {
-    this.userRepository = new UserRepository()
-  }
-
   async find(where: any = {}): Promise<UserInterface> {
-    return  await this.userRepository.find({where})
+    return  await UserRepository.find({where})
   }
 
   async findOne(id: string): Promise<UserInterface> {
-    return await this.userRepository.findOne({id})
+    return await UserRepository.findOne({id})
   }
 
   async findByEmail(email: string): Promise<UserInterface> {
-    return await this.userRepository.findOne({email})
+    return await UserRepository.findOne({email})
   }
 
   async create(data: UserInterface): Promise<UserInterface> {
-    return await this.userRepository.create(data)
+    return await UserRepository.create(data)
   }
 
   async update(id: string, data: UserInterface): Promise<UserInterface> {
-    return await this.userRepository.update({id}, data)
+    return await UserRepository.update({id}, data)
   }
 
   async delete(id: string): Promise<UserInterface> {
-    return await this.userRepository.delete({id})
+    return await UserRepository.delete({id})
   }
 }

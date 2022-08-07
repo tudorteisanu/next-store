@@ -12,6 +12,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+RUN yarn add @prisma/client
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder

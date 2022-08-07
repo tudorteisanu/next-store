@@ -7,6 +7,7 @@ set -eo pipefail
 #    cp .env.example .env
 #fi
 
+./node_modules/.bin/prisma db push
 
 pm2-runtime pm2.json
 
